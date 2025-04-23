@@ -20,7 +20,7 @@ function BitwiseControl(props: BitwiseControlProps) {
             (acc, byte, i) => acc | (byte << shifts[i]),
             0
         );
-        props.onChange(combined);
+        props.onChange(combined >>> 0); // Ensure the value is treated as unsigned
     };
 
     return (
