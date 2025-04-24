@@ -27,14 +27,14 @@ function App() {
       </div>
 
       { /* Main Content */}
-      <div className="w-full flex flex-1 flex-column min-h-[60vh] border-yellow-500 border-2 p-3">
+      <div className="w-full flex flex-1 flex-column min-h-[60vh] border-yellow-500 border-">
 
         <CodePointDisplay
-          className="flex-grow bg-gray-100 p-4 border-blue-500 border-2 container flex-col flex"
+          className="flex-grow bg-gray-100 p-4 border-gray-400 border-3 container flex-col flex"
           codePoint={bitwiseValue} />
 
         <NotesPanel
-          className="w-2/5 bg-gray-200 p-8"
+          className="w-2/5 bg-gray-300 p-8"
           onClick={(code) => setBitwiseValue(code)}
         />
       </div>
