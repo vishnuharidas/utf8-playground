@@ -4,6 +4,7 @@ import SingleByte from "./SingleByte";
 interface BitwiseControlProps {
     value: number;
     onChange: (newValue: number) => void,
+    onReset: () => void;
     className: string;
 }
 
@@ -35,7 +36,7 @@ function BitwiseControl(props: BitwiseControlProps) {
                 <button
                     type="button"
                     className="bg-red-500 text-white text-sm px-2 py-1 rounded cursor-pointer hover:bg-red-600"
-                    onClick={() => props.onChange(0)}
+                    onClick={() => props.onReset()}
                 >
                     Reset
                 </button>

@@ -5,7 +5,14 @@ import CodePointDisplay from './components/CodePointDisplay';
 import NotesPanel from './components/NotesPanel';
 
 function App() {
-  const [bitwiseValue, setBitwiseValue] = useState(0);
+
+  const defaultValue = 0b0000_0000_0000_1000_0000_1000_0000_1000_0000; // 4 bytes, with control bits for 2nd, 3rd, and 4th bytes enabled.
+
+  const [bitwiseValue, setBitwiseValue] = useState(defaultValue);
+
+  function reset() {
+    setBitwiseValue(defaultValue);
+  }
 
   return (
     <div className="flex flex-col h-screen">
@@ -34,7 +41,12 @@ function App() {
 
       { /* Footer */}
       <footer className="w-full bg-gray-100 p-8 border-2 border-gray-300">
-        <BitwiseControl className="bg-gray-100" value={bitwiseValue} onChange={setBitwiseValue} />
+        <BitwiseControl
+          className="bg-gray-100"
+          value={bitwiseValue}
+          onChange={setBitwiseValue}
+          onReset={reset}
+        />
       </footer>
 
     </div>
