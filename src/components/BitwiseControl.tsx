@@ -1,3 +1,4 @@
+import { getEnabledBytes } from "../utf8/utf8";
 import SingleByte from "./SingleByte";
 
 interface BitwiseControlProps {
@@ -11,6 +12,8 @@ function BitwiseControl(props: BitwiseControlProps) {
 
     const shifts = [24, 16, 8, 0];
     const bytes = shifts.map(shift => (props.value >> shift) & 0xff); // Extract bytes from the value
+
+    const enabeldBytes = getEnabledBytes(props.value);
 
     // Combine the bytes into a single value
     const handleByteChange = (index: number, newByte: number) => {
@@ -42,15 +45,19 @@ function BitwiseControl(props: BitwiseControlProps) {
 
             <div className="flex flex-row flex-wrap space-x-4 space-y-4">
                 {
-                    bytes.map((byte, i) => (
-                        <SingleByte
-                            key={i}
-                            byteNumber={i + 1}
-                            className="h-fit border-3 border-gray-300 max-w-fit p-2"
-                            value={byte}
-                            onChange={(newByte) => handleByteChange(i, newByte)}
-                        />
-                    ))
+                    bytes.map((byte, i) => {
+                        const byteClass = `h-fit border-3 ${enabeldBytes[i] ? `border-green-600 bg-green-50` : `border-gray-300`} max-w-fit p-2`
+                        return (
+                            <SingleByte
+                                key={i}
+                                byteNumber={i + 1}
+                                enabled={enabeldBytes[i]}
+                                className={byteClass}
+                                value={byte}
+                                onChange={(newByte) => handleByteChange(i, newByte)}
+                            />
+                        )
+                    })
                 }
             </div>
 
