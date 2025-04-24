@@ -1,4 +1,4 @@
-import { getEnabledBytes } from "../utf8/utf8";
+import { getControlBits, getEnabledBytes } from "../utf8/utf8";
 import SingleByte from "./SingleByte";
 
 interface BitwiseControlProps {
@@ -14,6 +14,8 @@ function BitwiseControl(props: BitwiseControlProps) {
     const bytes = shifts.map(shift => (props.value >> shift) & 0xff); // Extract bytes from the value
 
     const enabeldBytes = getEnabledBytes(props.value);
+    const controlBits = getControlBits(props.value); // To show the control bits in Black color
+    const controlBytes = shifts.map(shift => (controlBits >> shift) & 0xff); // Extract control bytes from the value
 
     // Combine the bytes into a single value
     const handleByteChange = (index: number, newByte: number) => {
@@ -52,6 +54,7 @@ function BitwiseControl(props: BitwiseControlProps) {
                                 key={i}
                                 byteNumber={i + 1}
                                 enabled={enabeldBytes[i]}
+                                controlBits={controlBytes[i]}
                                 className={byteClass}
                                 value={byte}
                                 onChange={(newByte) => handleByteChange(i, newByte)}

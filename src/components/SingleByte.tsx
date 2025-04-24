@@ -3,6 +3,7 @@ import React from "react";
 interface SingleByteProps {
     byteNumber: number;
     value: number;
+    controlBits: number;
     enabled: boolean;
     onChange: (newValue: number) => void;
     className: string;
@@ -25,14 +26,18 @@ function SingleByte(props: SingleByteProps) {
                     .map(bit => {
 
                         const isOn = (props.value & (1 << bit)) !== 0;
-                        const btnClasses = [
-                            "w-10 h-20 border-1 border-gray-300 font-mono text-4xl flex items-center justify-center",
-                            "cursor-pointer",
-                            props.enabled ? "text-black" : "bg-gray-300 text-gray-400",
-                            isOn && props.enabled ? "bg-green-400" : "bg-gray-200",
-                        ]
-                            .filter(Boolean) // Filter out falsy values (especially for the background color)
-                            .join(" ");
+
+                        // Choose colors based on the state of the bit and whether the byte is enabled
+                        const colors = (() => {
+                            if (props.controlBits & (1 << bit)) { // Dark green for control bits
+                                return props.enabled ? "bg-green-900 text-white" : "bg-gray-300 text-gray-400";
+                            }
+                            return props.enabled // Normal green/grey for other bits
+                                ? isOn ? "bg-green-400 text-black" : "bg-gray-200 text-black"
+                                : "bg-gray-300 text-gray-400";
+                        })();
+
+                        const btnClasses = `w-10 h-20 border-1 border-gray-300 font-mono text-4xl flex items-center justify-center cursor-pointer ${colors}`;
 
                         return (
                             <button
