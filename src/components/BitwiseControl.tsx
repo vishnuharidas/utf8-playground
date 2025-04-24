@@ -4,6 +4,7 @@ import SingleByte from "./SingleByte";
 interface BitwiseControlProps {
     value: number;
     onChange: (newValue: number) => void,
+    onRandom: () => void,
     onReset: () => void;
     className: string;
 }
@@ -32,14 +33,23 @@ function BitwiseControl(props: BitwiseControlProps) {
     return (
         <div className={`${props.className}`}>
             <div className="flex flex-row items-center justify-between">
-                <h2 className="text-lg font-bold">Bitwise Control</h2>
-                <button
-                    type="button"
-                    className="bg-red-500 text-white text-sm px-2 py-1 rounded cursor-pointer hover:bg-red-600"
-                    onClick={() => props.onReset()}
-                >
-                    Reset
-                </button>
+                <div className="flex items-center space-x-3">
+                    <h2 className="text-2xl font-bold">Bitwise Control</h2>
+                    <button
+                        type="button"
+                        className="bg-red-500 text-white text-sm px-2 py-1 rounded cursor-pointer hover:bg-red-600"
+                        onClick={() => props.onReset()}
+                    >
+                        Reset
+                    </button>
+                    <button
+                        type="button"
+                        className="bg-blue-500 text-white text-sm px-2 py-1 rounded cursor-pointer hover:bg-blue-600"
+                        onClick={() => props.onRandom()}
+                    >
+                        Random
+                    </button>
+                </div>
             </div>
             {/* Future controls for bitwise editing will go here */}
             <div className="text-lg">

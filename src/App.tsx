@@ -3,6 +3,7 @@ import './App.css';
 import BitwiseControl from './components/BitwiseControl';
 import CodePointDisplay from './components/CodePointDisplay';
 import NotesPanel from './components/NotesPanel';
+import { getRandomUtf8 } from './utf8/utf8';
 
 function App() {
 
@@ -12,6 +13,10 @@ function App() {
 
   function reset() {
     setBitwiseValue(defaultValue);
+  }
+
+  function random() {
+    setBitwiseValue(getRandomUtf8().code);
   }
 
   return (
@@ -46,6 +51,7 @@ function App() {
           value={bitwiseValue}
           onChange={setBitwiseValue}
           onReset={reset}
+          onRandom={random}
         />
       </footer>
 
