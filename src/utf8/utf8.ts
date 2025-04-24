@@ -104,3 +104,15 @@ export function processUtf8Bytes(
         error: error
     };
 }
+
+export function getEnabledBytes(num: number): boolean[] {
+
+    const byte1 = (num >> 24) & 0xFF;
+
+    return [
+        true,
+        (byte1 >> 5 | 0) === 0b110 || (byte1 >> 4 | 0) === 0b1110 || (byte1 >> 3 | 0) === 0b11110,
+        (byte1 >> 4 | 0) === 0b1110 || (byte1 >> 3 | 0) === 0b11110,
+        (byte1 >> 3 | 0) === 0b11110,
+    ];
+}
