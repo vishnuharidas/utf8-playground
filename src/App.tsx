@@ -26,7 +26,10 @@ function App() {
           className="flex-grow bg-gray-100 p-4 border-blue-500 border-2 container flex-col flex"
           codePoint={bitwiseValue} />
 
-        <NotesPanel className="w-2/5 bg-gray-200 p-8" />
+        <NotesPanel
+          className="w-2/5 bg-gray-200 p-8"
+          onClick={(code) => setBitwiseValue(code)}
+        />
       </div>
 
       { /* Footer */}
