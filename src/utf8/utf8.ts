@@ -116,3 +116,24 @@ export function getEnabledBytes(num: number): boolean[] {
         (byte1 >> 3 | 0) === 0b11110,
     ];
 }
+
+export function getControlBits(num: number): number {
+
+    const byte1 = (num >> 24) & 0xFF;
+    
+    let mainByte: number;
+    if ((byte1 >> 5 | 0) === 0b110) {
+        mainByte = 0b11100000;
+    } else if ((byte1 >> 4 | 0) === 0b1110) {
+        mainByte = 0b11110000;
+    } else if ((byte1 >> 3 | 0) === 0b11110) {
+        mainByte = 0b11111000;
+    } else {
+        mainByte = 0b00000000;
+    }
+
+    const otherBytes = 0b11000000
+
+    return mainByte << 24 | otherBytes << 16 | otherBytes << 8 | otherBytes;
+    
+}
