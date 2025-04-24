@@ -24,7 +24,7 @@ function BitwiseControl(props: BitwiseControlProps) {
     };
 
     return (
-        <div className={`${props.className} container`}>
+        <div className={`${props.className}`}>
             <div className="flex flex-row items-center justify-between">
                 <h2 className="text-lg font-bold">Bitwise Control</h2>
                 <button
@@ -36,19 +36,17 @@ function BitwiseControl(props: BitwiseControlProps) {
                 </button>
             </div>
             {/* Future controls for bitwise editing will go here */}
-            <div className="mt-2 text-lg font-mono">
-                {bytes
-                    .map((byte, i) => `B${i + 1}: ${byte.toString(16).padStart(2, '0').toUpperCase()}`)
-                    .join(' _ ')
-                }
+            <div className="text-lg">
+                Control the bits of available 4-byte encoding.
             </div>
 
-            <div className="border-1 border-b-blue-500 flex flex-row flex-wrap space-x-4">
+            <div className="flex flex-row flex-wrap space-x-4 space-y-4">
                 {
                     bytes.map((byte, i) => (
                         <SingleByte
                             key={i}
-                            className="border-3 border-green-600 max-w-fit"
+                            byteNumber={i + 1}
+                            className="h-fit border-3 border-gray-300 max-w-fit p-2"
                             value={byte}
                             onChange={(newByte) => handleByteChange(i, newByte)}
                         />
