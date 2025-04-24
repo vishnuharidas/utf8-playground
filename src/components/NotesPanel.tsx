@@ -60,15 +60,15 @@ function NotesPanel(props: NotesPanelProps) {
                     [
                         { "name": "Basic Latin", "start": 0x41000000 }, // Starts with 0x41 ('A')
                         { "name": "Latin-1 Supplement", "start": 0xC3800000 }, // Starts with 0xC3 ('Ã')
-                        { "name": "Latin Extended-A", "start": 3296722944 },
-                        { "name": "Greek and Coptic", "start": 3450863616 },
-                        { "name": "Cyrillic", "start": 3498049536 },
-                        { "name": "Hebrew", "start": 3599761408 },
-                        { "name": "Arabic", "start": 3632267264 },
-                        { "name": "Devanagari", "start": 0xE0A48500 },
-                        { "name": "Tamil", "start": 0xE0AE8500 },
-                        { "name": "Malayalam", "start": 0xE0B48500 },
-                        { "name": "CJK Unified Ideographs", "start": 3837296640 },
+                        { "name": "Latin Extended-A", "start": 3296722944 }, // Starts with 0xC4 ('Ä')
+                        { "name": "Greek and Coptic", "start": 3450863616 }, 
+                        { "name": "Cyrillic", "start": 3498049536 }, 
+                        { "name": "Hebrew", "start": 0xD7900000 },  // Starts with 0xD7 ('א')
+                        { "name": "Arabic", "start": 3632267264 },  // Starts with 0xE0 ('ا')
+                        { "name": "Devanagari", "start": 0xE0A48500 },  // Starts with 0xE0 ('अ')
+                        { "name": "Tamil", "start": 0xE0AE8500 }, // Starts with 0xE0 ('அ')
+                        { "name": "Malayalam", "start": 0xE0B48500 }, // Starts with 0xE0 ('അ')
+                        { "name": "CJK Unified Ideographs", "start": 3837296640 },  
                         { "name": "Emoticons", "start": 4036991104 }
                     ].map((block) => (
                         <li key={block.name} className="mb-2">
