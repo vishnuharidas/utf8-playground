@@ -36,7 +36,7 @@ async function generateUnicodeDataJson() {
 
             // Ensure we have at least the code and name fields
             // Ignore lines representing ranges (e.g., <..., First>, <..., Last>)
-            if (fields.length >= 2 && !fields[1].startsWith('<') && !fields[1].endsWith('Last>')) {
+            if (fields.length >= 2) {
                 const code = fields[0];
                 const name = fields[1];
                 unicodeData.push({ code: code, name: name });
