@@ -13,18 +13,18 @@ function CodePointDisplay(props: CodePointDisplayProps) {
 
     return (
         <div className={props.className}>
-            <div className="flex flex-row space-x-20">
+            <div className="flex flex-row flex-wrap space-x-20 space-y-2 md:space-y-1">
                 <div>
-                    <h2 className="text-xl">UTF-8 Encoded Value</h2>
-                    <p className='text-3xl font-mono'>{utf ?? "—"}</p>
+                    <h2 className="text-lg md:text-xl">UTF-8 Encoded Value</h2>
+                    <p className='font-mono text-xl md:text-2xl'>{utf ?? "—"}</p>
                 </div>
                 <div>
-                    <h2 className="text-xl">Unicode Code Point</h2>
-                    <p className='text-3xl font-mono'>{codepoint ?? "—"}</p>
+                    <h2 className="text-lg md:text-xl">Unicode Code Point</h2>
+                    <p className='font-mono text-xl md:text-2xl'>{codepoint ?? "—"}</p>
                 </div>
                 <div>
-                    <h2 className="text-xl">Official Name <sup><a className="text-[8pt]" target="_blank" href="https://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt">source↗</a></sup></h2>
-                    <p className='text-3xl font-normal'>{unicodeLookup ? unicodeLookup.name : "—"}</p>
+                    <h2 className="text-lg md:text-xl">Official Name <sup><a className="text-[8pt]" target="_blank" href="https://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt">source↗</a></sup></h2>
+                    <p className='font-mono text-xl md:text-2xl'>{unicodeLookup ? unicodeLookup.name : "—"}</p>
                 </div>
             </div>
             <div className="border-dashed border-2 w-full h-full flex items-center justify-center">
@@ -32,7 +32,7 @@ function CodePointDisplay(props: CodePointDisplayProps) {
                     error ? (
                         <div className="text-red-700 bg-amber-100 p-10 border-2 border-amber-300 text-xl text-center" dangerouslySetInnerHTML={{ __html: error }} />
                     ) : (
-                        <div className='text-[10vw] w-full h-full flex items-center justify-center'>
+                        <div className='text-[60pt] md:text-[12vw] w-full h-full flex items-center justify-center'>
                             {character}
                         </div>
                     )

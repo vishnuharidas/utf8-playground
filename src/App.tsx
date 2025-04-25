@@ -26,28 +26,27 @@ function App() {
   }, []);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-[auto_1fr_auto] md:h-screen">
 
       { /* Header */}
-      <header className="w-full bg-gray-200">
+      <header className="col-span-1 md:col-span-3 w-full bg-gray-200">
         <Header />
       </header>
 
-      { /* Main Content */}
-      <div className="w-full flex flex-1 flex-column min-h-[60vh] border-yellow-500 border-">
+      <CodePointDisplay
+        className="col-span-1 md:col-span-2 bg-gray-100 p-4 border-3 border-gray-400 flex flex-col"
+        codePoint={bitwiseValue} />
 
-        <CodePointDisplay
-          className="flex-grow bg-gray-100 p-4 border-gray-400 border-3 container flex-col flex"
-          codePoint={bitwiseValue} />
-
-        <NotesPanel
-          className="w-2/5 bg-gray-300 p-8"
-          onClick={(code) => setBitwiseValue(code)}
-        />
-      </div>
+      <NotesPanel
+        className="col-span-1 bg-gray-300 p-8 md:order-none order-last"
+        onClick={(code) => {
+          setBitwiseValue(code);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+      />
 
       { /* Footer */}
-      <footer className="w-full bg-gray-100 p-8 border-2 border-gray-300">
+      <footer className="col-span-1 md:col-span-3 w-full bg-gray-100 p-4 md:p-8 border-2 border-gray-300">
         <BitwiseControl
           className="bg-gray-100"
           value={bitwiseValue}

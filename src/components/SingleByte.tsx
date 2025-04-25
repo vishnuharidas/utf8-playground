@@ -37,7 +37,7 @@ function SingleByte(props: SingleByteProps) {
                                     ? "bg-green-300 text-black"
                                     : "bg-gray-300 text-gray-400"
 
-                        const btnClasses = `w-10 h-20 border-1 border-gray-300 font-mono text-4xl flex items-center justify-center cursor-pointer ${colors}`;
+                        const btnClasses = `md:w-10 w-[35px] h-20 border-1 border-gray-300 font-mono text-4xl flex items-center justify-center cursor-pointer ${colors}`;
 
                         return (
                             <button
