@@ -15,13 +15,17 @@ function getStrFromCodePoint(codePoint: number): { character: string, error: str
 
 }
 
+function isValidFollowingByte(byte: number): boolean {
+    return (byte >> 6 | 0) === 0b10;
+}
+
 export function processUtf8Bytes(
     num: number
 ): {
-    utf: string,
-    codepoint: string,
-    character: string,
-    error: string | undefined
+    utf?: string,
+    codepoint?: string,
+    character?: string,
+    error?: string
 } {
 
     const byte1 = (num >> 24) & 0xFF;
@@ -29,12 +33,55 @@ export function processUtf8Bytes(
     const byte3 = (num >> 8) & 0xFF;
     const byte4 = num & 0xFF;
 
-    let stringValue = "⚠️ Error";
-    let codePoint = "—";
-    let utfEncoding = "—"
+    let stringValue = "";
+    let codePoint: string | undefined = undefined;
+    let utfEncoding: string | undefined = undefined;
     let error: string | undefined = undefined;
 
     // There are better ways process UTF-8, but this is for simplicity and clarity.
+
+
+    // Rule out control bit errors first.
+
+    // If the first byte starts with 0b10xxxxxx, it's an invalid UTF-8 sequence.
+    if ((byte1 >> 6) === 0b10) {
+        return {
+            error: "⚠️ Error: First byte cannot start with <code>10xxxxxx</code>."
+        };
+    }
+
+    // If the first byte starts with 0b11111xxx, it's an invalid UTF-8 sequence.
+    if ((byte1 >> 3) === 0b11111) {
+        return {
+            error: "⚠️ Error: First byte cannot start with <code>11111xxx</code>.<br/>Possible options are <code>0xxxxxxx</code>, <code>110xxxxx</code>, <code>1110xxxx</code>, or <code>11110xxx</code>.<br/>"
+        };
+    }
+
+    // If the first byte starts with 0b110xxxyyy, it's a 2-byte character.
+    // First byte: 0b110xxxyy, second byte: 10yyzzzz
+    if ((byte1 >> 5) === 0b110 && !isValidFollowingByte(byte2)) {
+        return {
+            error: "⚠️ Error: Second byte must start with <code>10xxxxxx</code>."
+        };
+    }
+
+    // If the first byte starts with 0b1110xxxx, it's a 3-byte character.
+    // First byte: 0b1110wwww, Second byte: 10xxxxyy, third byte: 10yyzzzz
+    if ((byte1 >> 4) === 0b1110 && (!isValidFollowingByte(byte2) || !isValidFollowingByte(byte3))) {
+        return {
+            error: "⚠️ Error: Second and third bytes must start with <code>10xxxxxx</code>."
+        };
+    }
+
+    // If the first byte starts with 0b11110uvv, it's a 4-byte character.
+    // First byte: 11110uvv, second byte: 10vvwwww, third byte: 10xxxxyy, fourth byte: 10yyzzzz
+    if ((byte1 >> 3) === 0b11110 && (!isValidFollowingByte(byte2) || !isValidFollowingByte(byte3) || !isValidFollowingByte(byte4))) {
+        return {
+            error: "⚠️ Error: Second, third, and fourth bytes must start with <code>10xxxxxx</code>."
+        };
+    }
+
+    // If control bits are okay, we can process the bytes.
 
     // If the first byte starts with 0b0xxxxxxx, it's a 1-byte character.
     // Resulting codepoint: U+xxxxxxx
@@ -200,7 +247,6 @@ export function getRandomUtf8() {
         { "code": 0xDAAF0000, "letter": "گ" },
         { "code": 0xE1B1B100, "letter": "ᱚ" },
         { "code": 0xEAA38000, "letter": "ꯀ" },
-        { "code": 0xF0918480, "letter": "𑄀" },
         { "code": 0xF09F988D, "letter": "😍" },
         { "code": 0xE0A48500, "letter": "अ" },
         { "code": 0xE0A48600, "letter": "आ" },
@@ -228,7 +274,7 @@ export function getRandomUtf8() {
         { "code": 0xE0A89A00, "letter": "ਚ" },
         { "code": 0xE0A8A800, "letter": "ਨ" },
         { "code": 0xE0A8AA00, "letter": "ਪ" },
-        { "code": 0xE0A9B400, "letter": "ੴ" },
+
         { "code": 0xE0AA8500, "letter": "અ" },
         { "code": 0xE0AA8700, "letter": "ઇ" },
         { "code": 0xE0AA9500, "letter": "ક" },
@@ -297,7 +343,6 @@ export function getRandomUtf8() {
         { "code": 0xD0A40000, "letter": "Ф" },
         { "code": 0xD0A60000, "letter": "Ц" },
         { "code": 0xD0AB0000, "letter": "Ы" },
-        { "code": 0xD8A70000, "letter": "ا" },
         { "code": 0xD8A80000, "letter": "ب" },
         { "code": 0xD8AA0000, "letter": "ت" },
         { "code": 0xD8AC0000, "letter": "ج" },
@@ -305,25 +350,8 @@ export function getRandomUtf8() {
         { "code": 0xD8B10000, "letter": "ر" },
         { "code": 0xD8B30000, "letter": "س" },
         { "code": 0xD8B90000, "letter": "ع" },
-        { "code": 0xE4BDA000, "letter": "你" },
-        { "code": 0xE5A5BD00, "letter": "好" },
-        { "code": 0xE8B0A200, "letter": "谢" },
-        { "code": 0xE4B8AD00, "letter": "中" },
-        { "code": 0xE59BBD00, "letter": "国" },
-        { "code": 0xE4BABA00, "letter": "人" },
         { "code": 0xE3818200, "letter": "あ" },
-        { "code": 0xE382AB00, "letter": "カ" },
-        { "code": 0xE697A500, "letter": "日" },
-        { "code": 0xE69CAC00, "letter": "本" },
-        { "code": 0xE8AA9E00, "letter": "語" },
-        { "code": 0xE7A78100, "letter": "私" },
-        { "code": 0xED959C00, "letter": "한" },
-        { "code": 0xEAB88000, "letter": "글" },
-        { "code": 0xEC958800, "letter": "안" },
-        { "code": 0xEB859500, "letter": "녕" },
-        { "code": 0xEC84B800, "letter": "세" },
-        { "code": 0xEC9A9400, "letter": "요" },
- ]
+    ]
 
     return randomUtf8Symbols[Math.floor(Math.random() * randomUtf8Symbols.length)];
 }
@@ -338,5 +366,5 @@ export function lookupUnicode(code: string) {
 
     console.log(code);
 
-    return unicodeTable.find(item  => item.code === code);
+    return unicodeTable.find(item => item.code === code);
 }
