@@ -1,0 +1,8 @@
+a {
+  color: #054be2; /* blue-600 */
+}
+
+a:hover {
+  color: #d81d7e; 
+  text-decoration: underline;
+}
