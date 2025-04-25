@@ -16,8 +16,8 @@ function SingleByte(props: SingleByteProps) {
         props.onChange(props.value ^ (1 << bit));
 
     return (
-        <div className={`${props.className} flex flex-col`}>
-            <div className={`text-center text-sm ${props.enabled ? `font-bold  text-black` : `font-normal text-gray-500`}`}>
+        <div className={`${props.className} flex flex-col ${props.enabled ? `` : `border-dotted`}`}>
+            <div className={`text-center text-sm ${props.enabled ? `font-bold  text-black` : `font-bold text-gray-400`}`}>
                 {`Byte ${props.byteNumber} ${props.enabled ? "" : "(Disabled)"}`}
             </div>
             <div className="flex flex-row items-center justify-center gap-1">
@@ -28,14 +28,14 @@ function SingleByte(props: SingleByteProps) {
                         const isOn = (props.value & (1 << bit)) !== 0;
 
                         // Choose colors based on the state of the bit and whether the byte is enabled
-                        const colors = (() => {
-                            if (props.controlBits & (1 << bit)) { // Dark green for control bits
-                                return props.enabled ? "bg-green-900 text-white" : "bg-gray-300 text-gray-400";
-                            }
-                            return props.enabled // Normal green/grey for other bits
-                                ? isOn ? "bg-green-400 text-black" : "bg-gray-200 text-black"
-                                : "bg-gray-300 text-gray-400";
-                        })();
+                        const colors =
+                            props.controlBits & (1 << bit)      // Dark green for control bits
+                                ? props.enabled
+                                    ? "bg-green-900 text-white"
+                                    : "bg-gray-300 text-gray-400"
+                                : props.enabled                 // Light green for data bits        
+                                    ? "bg-green-300 text-black"
+                                    : "bg-gray-300 text-gray-400"
 
                         const btnClasses = `w-10 h-20 border-1 border-gray-300 font-mono text-4xl flex items-center justify-center cursor-pointer ${colors}`;
 

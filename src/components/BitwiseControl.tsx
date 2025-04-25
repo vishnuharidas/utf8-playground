@@ -52,8 +52,8 @@ function BitwiseControl(props: BitwiseControlProps) {
                 </div>
             </div>
             {/* Future controls for bitwise editing will go here */}
-            <div className="text-lg">
-                Control the bits of available 4-byte encoding.
+            <div className="text-lg mb-1">
+                Use the controls below to modify the bits of the 4-byte encoding. A dark green bit <code className="bg-green-900 text-white p-0.5">1</code> / <code className="bg-green-900 text-white p-0.5">0</code> is a control bit, while a light green bit <code className="bg-green-300 text-black p-0.5">1</code> / <code className="bg-green-300 text-black p-0.5">0</code> is a data bit. Click on a bit to toggle it.
             </div>
 
             <div className="flex flex-row flex-wrap space-x-4 space-y-4">
