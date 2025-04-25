@@ -329,5 +329,14 @@ export function getRandomUtf8() {
 }
 
 export function lookupUnicode(code: string) {
+
+    console.log(code);
+    // If the code has more than 4 characters, then remove the leading 0s
+    if (code.length > 4) {
+        code = code.replace(/^0+/, '');
+    }
+
+    console.log(code);
+
     return unicodeTable.find(item  => item.code === code);
 }
