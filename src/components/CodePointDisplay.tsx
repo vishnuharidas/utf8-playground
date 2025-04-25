@@ -23,7 +23,7 @@ function CodePointDisplay(props: CodePointDisplayProps) {
                     <p className='text-3xl font-mono'>{codepoint}</p>
                 </div>
                 <div>
-                    <h2 className="text-xl">Name</h2>
+                    <h2 className="text-xl">Official Name <sup><a className="text-[8pt]" target="_blank" href="https://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt">source↗</a></sup></h2>
                     <p className='text-3xl font-normal'>{unicodeLookup ? unicodeLookup.name : "Unknown"}</p>
                 </div>
             </div>
