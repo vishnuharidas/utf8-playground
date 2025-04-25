@@ -46,14 +46,14 @@ export function processUtf8Bytes(
     // If the first byte starts with 0b10xxxxxx, it's an invalid UTF-8 sequence.
     if ((byte1 >> 6) === 0b10) {
         return {
-            error: "⚠️ Error: First byte cannot start with <code>10xxxxxx</code>."
+            error: "⚠️ Error: First byte cannot start with <code>10xxxxxx</code>. <br/>Possible options are <code>0xxxxxxx</code>, <code>110xxxxx</code>, <code>1110xxxx</code>, or <code>11110xxx</code>."
         };
     }
 
     // If the first byte starts with 0b11111xxx, it's an invalid UTF-8 sequence.
     if ((byte1 >> 3) === 0b11111) {
         return {
-            error: "⚠️ Error: First byte cannot start with <code>11111xxx</code>.<br/>Possible options are <code>0xxxxxxx</code>, <code>110xxxxx</code>, <code>1110xxxx</code>, or <code>11110xxx</code>.<br/>"
+            error: "⚠️ Error: First byte cannot start with <code>11111xxx</code>.<br/>Possible options are <code>0xxxxxxx</code>, <code>110xxxxx</code>, <code>1110xxxx</code>, or <code>11110xxx</code>."
         };
     }
 
