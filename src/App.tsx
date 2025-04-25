@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import BitwiseControl from './components/BitwiseControl';
 import CodePointDisplay from './components/CodePointDisplay';
@@ -18,6 +18,11 @@ function App() {
   function random() {
     setBitwiseValue(getRandomUtf8().code);
   }
+
+  useEffect(() => {
+    // Pick a random character on first load
+    random();
+  }, []);
 
   return (
     <div className="flex flex-col h-screen">
