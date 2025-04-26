@@ -21,11 +21,11 @@ UTF-8 Playground is a web-based tool designed to help developers and enthusiasts
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/vishnuharidas/utf8-playground-web.git
+    git clone https://github.com/vishnuharidas/utf8-playground.git
     ```
 2. Navigate to the project directory:
     ```bash
-    cd utf8-playground-web/utf8-pg
+    cd utf8-playground
     ```
 3. Install dependencies:
     ```bash
