@@ -13,8 +13,8 @@ function AppHeader() {
                 rel="noopener noreferrer"
                 className="ml-4 flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity"
             >
-                <img src="/images/github-mark.svg" alt="UTF-8 Encoding" className="w-auto h-auto max-w-[40px]" />
-                <span className="mt-2 text-sm">Fork on GitHub</span>
+                <img src="/images/github-mark.svg" alt="UTF-8 Encoding" className="w-auto h-auto max-w-[30px]" />
+                <span className="mt-2 text-sm">source↗</span>
             </a>
         </div>
     );
