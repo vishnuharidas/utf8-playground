@@ -124,6 +124,13 @@ function NotesPanel(props: NotesPanelProps) {
                     The character name details are obtained from the Unicode lookup table. The lookup table contains information about each character, including its name, code point, and other properties. The table is used to map code points to their corresponding characters and names.
                     Unicode lookup table source: <a className="text-blue-500 underline hover:text-blue-700" target="_blank" href="https://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt">UnicodeData.txt↗</a>
                 </p>
+
+                <br />
+                <p className="text-sm text-gray-600 border-t-1 border-t-gray-400 pt-4">
+                    Copyright (c) 2025 Vishnu Haridas
+                    <br />
+                    This software is published under MIT License. See <a href="https://github.com/vishnuharidas/utf8-playground"> repository</a> for more details.
+                </p>
             </div>
         </div>
     );
