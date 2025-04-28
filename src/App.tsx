@@ -4,7 +4,7 @@ import BitwiseControl from './components/BitwiseControl';
 import CodePointDisplay from './components/CodePointDisplay';
 import Header from './components/Header';
 import NotesPanel from './components/NotesPanel';
-import { getRandomUtf8 } from './utf8/utf8';
+import { codePointToUtf8Int, getRandomUtf8Int } from './utf8/utf8';
 
 function App() {
 
@@ -17,12 +17,18 @@ function App() {
   }
 
   function random() {
-    setBitwiseValue(getRandomUtf8().code);
+    setBitwiseValue(getRandomUtf8Int());
   }
 
   useEffect(() => {
-    // Pick a random character on first load
-    random();
+
+    // If the URL has "/codepoint" format, then use that codepoint. Else, pick a random codepoint.
+    const url = window.location.href;
+    const codepointMatch = url.match(/\/([0-9A-Fa-f]{1,8})/);
+
+    const utf8int = codepointMatch ? codePointToUtf8Int(codepointMatch[1]) : null;
+    setBitwiseValue(utf8int ?? getRandomUtf8Int());
+
   }, []);
 
   return (
