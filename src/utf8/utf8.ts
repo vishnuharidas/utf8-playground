@@ -187,168 +187,12 @@ export function getControlBits(num: number): number {
 
 }
 
-export function getRandomUtf8() {
+export function getRandomUtf8Int() {
 
-    const randomUtf8Symbols = [
-        { "code": 0x30000000, "letter": "0" },
-        { "code": 0x37000000, "letter": "7" },
-        { "code": 0x38000000, "letter": "8" },
-        { "code": 0x39000000, "letter": "9" },
-        { "code": 0x41000000, "letter": "A" },
-        { "code": 0x42000000, "letter": "B" },
-        { "code": 0x43000000, "letter": "C" },
-        { "code": 0x44000000, "letter": "D" },
-        { "code": 0x3F000000, "letter": "?" },
-        { "code": 0x2E000000, "letter": "." },
-        { "code": 0x2C000000, "letter": "," },
-        { "code": 0x3B000000, "letter": ";" },
-        { "code": 0x3A000000, "letter": ":" },
-        { "code": 0x2D000000, "letter": "-" },
-        { "code": 0x5F000000, "letter": "_" },
-        { "code": 0xC3A10000, "letter": "á" },
-        { "code": 0xC3A90000, "letter": "é" },
-        { "code": 0xC3AD0000, "letter": "í" },
-        { "code": 0xC3B30000, "letter": "ó" },
-        { "code": 0xC3BA0000, "letter": "ú" },
-        { "code": 0xC3BC0000, "letter": "ü" },
-        { "code": 0xC3B10000, "letter": "ñ" },
-        { "code": 0xC3A70000, "letter": "ç" },
-        { "code": 0xCEB20000, "letter": "β" },
-        { "code": 0xCEB40000, "letter": "δ" },
-        { "code": 0xCEB50000, "letter": "ε" },
-        { "code": 0xCEB60000, "letter": "ζ" },
-        { "code": 0xD18F0000, "letter": "я" },
-        { "code": 0xD1880000, "letter": "ш" },
-        { "code": 0xD0940000, "letter": "Д" },
-        { "code": 0xD1890000, "letter": "щ" },
-        { "code": 0xD18D0000, "letter": "э" },
-        { "code": 0xD0B90000, "letter": "й" },
-        { "code": 0xD7900000, "letter": "א" },
-        { "code": 0xD7910000, "letter": "ב" },
-        { "code": 0xD7920000, "letter": "ג" },
-        { "code": 0xD7930000, "letter": "ד" },
-        { "code": 0xD7940000, "letter": "ה" },
-        { "code": 0xD7960000, "letter": "ז" },
-        { "code": 0xD7970000, "letter": "ח" },
-        { "code": 0xC4810000, "letter": "ā" },
-        { "code": 0xC58B0000, "letter": "ŋ" },
-        { "code": 0xF09F9880, "letter": "😀" },
-        { "code": 0xF09F9882, "letter": "😂" },
-        { "code": 0xF09F988E, "letter": "😎" },
-        { "code": 0xF09F918D, "letter": "👍" },
-        { "code": 0xF09F8C8E, "letter": "🌎" },
-        { "code": 0xF09F8E89, "letter": "🎉" },
-        { "code": 0xF09FA494, "letter": "🤔" },
-        { "code": 0xF09F998F, "letter": "🙏" },
-        { "code": 0xD0960000, "letter": "Ж" },
-        { "code": 0xD0810000, "letter": "Ё" },
-        { "code": 0xD9B90000, "letter": "ٹ" },
-        { "code": 0xD9BB0000, "letter": "ٻ" },
-        { "code": 0xDAAF0000, "letter": "گ" },
-        { "code": 0xE1B1B100, "letter": "ᱚ" },
-        { "code": 0xEAA38000, "letter": "ꯀ" },
-        { "code": 0xF09F988D, "letter": "😍" },
-        { "code": 0xE0A48500, "letter": "अ" },
-        { "code": 0xE0A48600, "letter": "आ" },
-        { "code": 0xE0A48700, "letter": "इ" },
-        { "code": 0xE0A49500, "letter": "क" },
-        { "code": 0xE0A49700, "letter": "ग" },
-        { "code": 0xE0A49A00, "letter": "च" },
-        { "code": 0xE0A4A400, "letter": "त" },
-        { "code": 0xE0A4A800, "letter": "न" },
-        { "code": 0xE0A4AA00, "letter": "प" },
-        { "code": 0xE0A4AE00, "letter": "म" },
-        { "code": 0xE0A4B000, "letter": "र" },
-        { "code": 0xE0A4B600, "letter": "श" },
-        { "code": 0xE0A68500, "letter": "অ" },
-        { "code": 0xE0A68700, "letter": "ই" },
-        { "code": 0xE0A69500, "letter": "ক" },
-        { "code": 0xE0A69A00, "letter": "চ" },
-        { "code": 0xE0A6AC00, "letter": "ব" },
-        { "code": 0xE0A6B700, "letter": "ষ" },
-        { "code": 0xE0A79C00, "letter": "ড়" },
-        { "code": 0xE0A88500, "letter": "ਅ" },
-        { "code": 0xE0A88700, "letter": "ਇ" },
-        { "code": 0xE0A89500, "letter": "ਕ" },
-        { "code": 0xE0A89A00, "letter": "ਚ" },
-        { "code": 0xE0A8A800, "letter": "ਨ" },
-        { "code": 0xE0A8AA00, "letter": "ਪ" },
+    return codePointToUtf8Int(
+        unicodeTable[Math.floor(Math.random() * unicodeTable.length)].code
+    ) ?? Math.floor(Math.random() * 500);
 
-        { "code": 0xE0AA8500, "letter": "અ" },
-        { "code": 0xE0AA8700, "letter": "ઇ" },
-        { "code": 0xE0AA9500, "letter": "ક" },
-        { "code": 0xE0AA9A00, "letter": "ચ" },
-        { "code": 0xE0AAA800, "letter": "ન" },
-        { "code": 0xE0AAB000, "letter": "ર" },
-        { "code": 0xE0AAB600, "letter": "શ" },
-        { "code": 0xE0AC8500, "letter": "ଅ" },
-        { "code": 0xE0AC8700, "letter": "ଇ" },
-        { "code": 0xE0AC9500, "letter": "କ" },
-        { "code": 0xE0AC9C00, "letter": "ଜ" },
-        { "code": 0xE0ACA300, "letter": "ଣ" },
-        { "code": 0xE0ACB200, "letter": "ଲ" },
-        { "code": 0xE0AD9C00, "letter": "ଡ଼" },
-        { "code": 0xE0B08500, "letter": "அ" },
-        { "code": 0xE0B08700, "letter": "இ" },
-        { "code": 0xE0B09500, "letter": "க" },
-        { "code": 0xE0B09A00, "letter": "ச" },
-        { "code": 0xE0B0A800, "letter": "ந" },
-        { "code": 0xE0B0B400, "letter": "ழ" },
-        { "code": 0xE0B0B800, "letter": "ஸ" },
-        { "code": 0xE0B18700, "letter": "ఇ" },
-        { "code": 0xE0B19A00, "letter": "చ" },
-        { "code": 0xE0B1A800, "letter": "న" },
-        { "code": 0xE0B28500, "letter": "ಅ" },
-        { "code": 0xE0B28700, "letter": "ಇ" },
-        { "code": 0xE0B29500, "letter": "ಕ" },
-        { "code": 0xE0B29A00, "letter": "ಚ" },
-        { "code": 0xE0B2A800, "letter": "ನ" },
-        { "code": 0xE0B2B300, "letter": "ಳ" },
-        { "code": 0xE0B2B600, "letter": "ಶ" },
-        { "code": 0xE0B48500, "letter": "അ" },
-        { "code": 0xE0B48700, "letter": "ഇ" },
-        { "code": 0xE0B49500, "letter": "ക" },
-        { "code": 0xE0B49A00, "letter": "ച" },
-        { "code": 0xE0B4A300, "letter": "ണ" },
-        { "code": 0xE0B4B400, "letter": "ഴ" },
-        { "code": 0xE0B4B600, "letter": "ശ" },
-        { "code": 0xC3810000, "letter": "Á" },
-        { "code": 0xC3890000, "letter": "É" },
-        { "code": 0xC38D0000, "letter": "Í" },
-        { "code": 0xC3930000, "letter": "Ó" },
-        { "code": 0xC39A0000, "letter": "Ú" },
-        { "code": 0xC3910000, "letter": "Ñ" },
-        { "code": 0xC3870000, "letter": "Ç" },
-        { "code": 0xC3A00000, "letter": "à" },
-        { "code": 0xC3A20000, "letter": "â" },
-        { "code": 0xC3AA0000, "letter": "ê" },
-        { "code": 0xC3AE0000, "letter": "î" },
-        { "code": 0xC3B40000, "letter": "ô" },
-        { "code": 0xC5930000, "letter": "œ" },
-        { "code": 0xE282AC00, "letter": "€" },
-        { "code": 0xC3A40000, "letter": "ä" },
-        { "code": 0xC3B60000, "letter": "ö" },
-        { "code": 0xC3840000, "letter": "Ä" },
-        { "code": 0xC3960000, "letter": "Ö" },
-        { "code": 0xC39C0000, "letter": "Ü" },
-        { "code": 0xC39F0000, "letter": "ß" },
-        { "code": 0xD0910000, "letter": "Б" },
-        { "code": 0xD0930000, "letter": "Г" },
-        { "code": 0xD09F0000, "letter": "П" },
-        { "code": 0xD0A40000, "letter": "Ф" },
-        { "code": 0xD0A60000, "letter": "Ц" },
-        { "code": 0xD0AB0000, "letter": "Ы" },
-        { "code": 0xD8A80000, "letter": "ب" },
-        { "code": 0xD8AA0000, "letter": "ت" },
-        { "code": 0xD8AC0000, "letter": "ج" },
-        { "code": 0xD8AF0000, "letter": "د" },
-        { "code": 0xD8B10000, "letter": "ر" },
-        { "code": 0xD8B30000, "letter": "س" },
-        { "code": 0xD8B90000, "letter": "ع" },
-        { "code": 0xE3818200, "letter": "あ" },
-    ]
-
-    return randomUtf8Symbols[Math.floor(Math.random() * randomUtf8Symbols.length)];
 }
 
 export function lookupUnicode(code: string) {
@@ -362,4 +206,51 @@ export function lookupUnicode(code: string) {
     console.log(code);
 
     return unicodeTable.find(item => item.code === code);
+}
+
+export function codePointToUtf8Int(hexString: string): number | null {
+    const codePoint = parseInt(hexString, 16);
+
+    let bytes: number[] = [];
+
+    if (codePoint <= 0x7F) {
+        // 1-byte UTF-8
+        bytes = [codePoint];
+    } else if (codePoint <= 0x7FF) {
+        // 2-byte UTF-8
+        bytes = [
+            0b11000000 | (codePoint >> 6),
+            0b10000000 | (codePoint & 0b00111111)
+        ];
+    } else if (codePoint <= 0xFFFF) {
+        // 3-byte UTF-8
+        bytes = [
+            0b11100000 | (codePoint >> 12),
+            0b10000000 | ((codePoint >> 6) & 0b00111111),
+            0b10000000 | (codePoint & 0b00111111)
+        ];
+    } else if (codePoint <= 0x10FFFF) {
+        // 4-byte UTF-8
+        bytes = [
+            0b11110000 | (codePoint >> 18),
+            0b10000000 | ((codePoint >> 12) & 0b00111111),
+            0b10000000 | ((codePoint >> 6) & 0b00111111),
+            0b10000000 | (codePoint & 0b00111111)
+        ];
+    } else {
+        return null;
+    }
+
+    // Pad with trailing zeros to always have 4 bytes
+    while (bytes.length < 4) {
+        bytes.push(0);
+    }
+
+    // Pack the bytes into a single 32-bit unsigned integer
+    let result = 0;
+    for (let b of bytes) {
+        result = (result << 8) | b;
+    }
+
+    return result >>> 0; // Ensure unsigned 32-bit
 }
