@@ -221,6 +221,12 @@ export function lookupUnicode(code: string) {
     } else if (code.length < 4) { // if code length <4 then add leading 0s
         code = code.padStart(4, '0');
     }
+
+    // If it is just "0", return the entry for "0000".
+    if (code === '0') {
+        return unicodeTable[0];
+    }
+
     // console.log(code); // Original console log, commented out
     return unicodeTable.find(item => item.code === code);
 }
