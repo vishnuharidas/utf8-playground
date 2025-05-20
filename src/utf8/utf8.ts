@@ -218,6 +218,8 @@ export function lookupUnicode(code: string) {
     // If after stripping, the code is empty (e.g., "00000" -> ""), default to "0" for U+0000.
     if (code.length > 4) {
         code = code.replace(/^0+/, '') || '0';
+    } else if (code.length < 4) { // if code length <4 then add leading 0s
+        code = code.padStart(4, '0');
     }
     // console.log(code); // Original console log, commented out
     return unicodeTable.find(item => item.code === code);
