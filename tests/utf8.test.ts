@@ -1,8 +1,7 @@
-import { lookupUnicode, codePointToUtf8Int, processUtf8Bytes } from './utf8';
-import unicodeTableData from './unicode_table.json'; // For actual data reference if needed elsewhere, but we'll mock for tests
+import { lookupUnicode, codePointToUtf8Int, processUtf8Bytes } from '../src/utf8/utf8';
 
 // Mock the unicodeTable directly in the test file
-jest.mock('./unicode_table.json', () => [
+jest.mock('../src/utf8/unicode_table.json', () => [
   { code: '0000', name: '<control>' },
   { code: '0041', name: 'LATIN CAPITAL LETTER A' },
   { code: '00A2', name: 'CENT SIGN' },
