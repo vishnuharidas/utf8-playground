@@ -150,7 +150,9 @@ export function processUtf8Bytes(
             const result = getStrFromCodePoint(byte);
             stringValue = result.character;
             error = result.error;
-            codePoint = `U+${byte.toString(16).toUpperCase()}`;
+            codePoint = byte > 0xE18080
+                ? `U+${byte.toString(16).toUpperCase()}`
+                : `U+${byte.toString(16).padStart(4, '0').toUpperCase()}`; // Overlong code points
             utfEncoding = `0x${byte1.toString(16).padStart(2, '0').toUpperCase()}${byte2.toString(16).padStart(2, '0').toUpperCase()}${byte3.toString(16).padStart(2, '0').toUpperCase()}${byte4.toString(16).padStart(2, '0').toUpperCase()}`;
         } else {
             error = "⚠️ Error: Invalid UTF-8 sequence: Expected continuation byte for 4-byte character.";
