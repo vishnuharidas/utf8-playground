@@ -22,5 +22,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "tests/utf8.test.ts"]
+  "include": ["src", "tests/**/*.ts"]
 }
