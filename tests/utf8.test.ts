@@ -21,7 +21,22 @@ describe('UTF-8 Utility Functions', () => {
       const result = lookupUnicode('00');
       expect(result).toEqual({ code: '0000', name: '<control>' });
     });
+
+    it('should return the entry for U+0000 when code is "0000"', () => {
+      const result = lookupUnicode('0000');
+      expect(result).toEqual({ code: '0000', name: '<control>' });
+    });
+
+    it('should return the entry for U+0000 when code is "00000"', () => {
+      const result = lookupUnicode('00000');
+      expect(result).toEqual({ code: '0000', name: '<control>' });
+    });
     
+    it('should return the entry for U+0041 when code is "00000041"', () => {
+      const result = lookupUnicode("00000041");
+      expect(result).toEqual({ code: '0041', name: 'LATIN CAPITAL LETTER A' });
+    });
+
     it('should return "LATIN CAPITAL LETTER A" for code "41"', () => {
       const result = lookupUnicode('41');
       expect(result?.name).toBe('LATIN CAPITAL LETTER A');
