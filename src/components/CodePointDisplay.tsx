@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { lookupUnicode, processUtf8Bytes } from "../utf8/utf8";
 
 interface CodePointDisplayProps {
@@ -19,6 +19,11 @@ function CodePointDisplay(props: CodePointDisplayProps) {
         if (!nextCodepoint) return;
         props.onChangeCodePoint(nextCodepoint.replace('U+', ''));
     }
+
+    // Reset nextCodepoint when codepoint changes
+    useEffect(() => {
+        setNextCodepoint(codepoint);
+    }, [codepoint]);
 
     return (
         <div className={props.className}>
