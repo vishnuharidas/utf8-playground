@@ -33,18 +33,20 @@ function CodePointDisplay(props: CodePointDisplayProps) {
                     <p className='font-mono text-xl md:text-2xl'>{utf ?? "—"}</p>
                 </div>
                 <div className="border-b-gray-300 border-b-1 md:border-none items-center md:items-start flex flex-row justify-between md:justify-normal flex-grow md:flex-col md:flex-none">
-                    <h2 className="text-sm md:text-xl">Unicode Code Point</h2>
-                    <p className='font-mono text-xl md:text-2xl'>
-                        <form
+                    <h2 className="text-sm md:text-xl">Unicode Code Point <sup><span className="text-[8pt] text-gray-600">(click to edit)</span></sup></h2>
+                    <div className='font-mono text-xl md:text-2xl'>
+                        <form id="codepoint-input-form"
                             onSubmit={submit}
                         >
                             <input
+                                id="codepoint-input-field"
+                                className="text-right md:text-left"
                                 type="text"
                                 value={nextCodepoint ?? codepoint ?? "—"}
                                 onChange={e => setNextCodepoint(e.target.value)}
                             />
                         </form>
-                    </p>
+                    </div>
                 </div>
                 <div>
                     <h2 className="text-sm md:text-xl">Official Name <sup><a className="text-[8pt]" target="_blank" href="https://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt">source↗</a></sup></h2>
