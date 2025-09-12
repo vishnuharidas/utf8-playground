@@ -9,7 +9,10 @@ function NotesPanel(props: NotesPanelProps) {
             <h2 className="text-2xl font-bold mb-2">UFT-8 Encoding</h2>
             <div className="text-grey-700 text-md space-y-3">
                 <p>UTF-8 is a variable-width character encoding designed to represent every character in the Unicode character set, encompassing characters from most of the world's writing systems.</p>
-                <p>It encodes characters using <strong>one to four bytes</strong>. The first 128 characters (U+0000 to U+007F) are encoded with a single byte, ensuring backward compatibility with ASCII, while other characters require two, three, or four bytes.</p>
+                <p>It encodes characters using <strong>one to four bytes</strong>. The first 128 characters (U+0000 to U+007F) are encoded with a single byte, <strong>ensuring backward compatibility with ASCII</strong>
+                    <sup>
+                        <a href="https://iamvishnu.com/posts/utf8-is-brilliant-design">(read my post on this↗)</a>
+                    </sup>, while other characters require two, three, or four bytes.</p>
                 <p>The <strong>leading bits of the first byte</strong> determine the total number of bytes in the character. These bits follow one of four specific patterns, which indicate how many continuation bytes follow.</p>
                 <ul className="list-disc list-inside mt-2 space-y-2">
                     <li>
