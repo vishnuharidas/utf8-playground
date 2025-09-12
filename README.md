@@ -28,6 +28,6 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 
 ## License
 
-Copyright (c) 2025 [Vishnu Haridas](https://iamvishnu.com/)
+Copyright (c) 2025 The UTF-8 Playground Contributors
 
 This software is published under MIT License. See [LICENSE.txt](LICENSE.txt) for more details

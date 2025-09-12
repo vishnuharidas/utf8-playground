@@ -130,7 +130,7 @@ function NotesPanel(props: NotesPanelProps) {
 
                 <br />
                 <p className="text-sm text-gray-600 border-t-1 border-t-gray-400 pt-4">
-                    Copyright (c) 2025 Vishnu Haridas
+                    Copyright (c) 2025 The UTF-8 Playground Contributors
                     <br />
                     This software is published under MIT License. See <a href="https://github.com/vishnuharidas/utf8-playground" target="_blank"> repository↗</a> for more details.
                 </p>
