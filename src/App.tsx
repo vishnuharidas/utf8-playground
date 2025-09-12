@@ -20,6 +20,12 @@ function App() {
     setBitwiseValue(getRandomUtf8Int());
   }
 
+  function setCodepoint(codepoint: string) {
+    const int = codePointToUtf8Int(codepoint);
+    if (!int) return;
+    setBitwiseValue(int);
+  }
+
   useEffect(() => {
 
     // If the URL has "/codepoint" format, then use that codepoint. Else, pick a random codepoint.
@@ -41,7 +47,8 @@ function App() {
 
       <CodePointDisplay
         className="col-span-1 md:col-span-2 bg-gray-100 p-4 border-3 border-gray-400 flex flex-col"
-        codePoint={bitwiseValue} />
+        codePoint={bitwiseValue}
+        onChangeCodePoint={setCodepoint} />
 
       <NotesPanel
         className="col-span-1 bg-gray-300 p-8 md:order-none order-last"
