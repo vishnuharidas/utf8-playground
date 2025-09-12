@@ -6,7 +6,7 @@ interface NotesPanelProps {
 function NotesPanel(props: NotesPanelProps) {
     return (
         <div className={`${props.className} overflow-y-auto`}>
-            <h2 className="text-2xl font-bold mb-2">UFT-8 Encoding</h2>
+            <h2 className="text-2xl font-bold mb-2">UTF-8 Encoding</h2>
             <div className="text-grey-700 text-md space-y-3">
                 <p>UTF-8 is a variable-width character encoding designed to represent every character in the Unicode character set, encompassing characters from most of the world's writing systems.</p>
                 <p>It encodes characters using <strong>one to four bytes</strong>. The first 128 characters (U+0000 to U+007F) are encoded with a single byte, <strong>ensuring backward compatibility with ASCII</strong>
