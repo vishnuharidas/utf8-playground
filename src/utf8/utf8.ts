@@ -26,7 +26,8 @@ export function processUtf8Bytes(
     utf?: string,
     codepoint?: string,
     character?: string,
-    error?: string
+    error?: string,
+    overlongBy?: number
 } {
 
     const byte1 = (num >> 24) & 0xFF;
@@ -38,6 +39,7 @@ export function processUtf8Bytes(
     let codePoint: string | undefined = undefined;
     let utfEncoding: string | undefined = undefined;
     let error: string | undefined = undefined;
+    let overlongBy: number = 0;
 
     // This function processes UTF-8 bytes from a 32-bit integer.
     // It prioritizes clear, step-by-step logic for educational purposes over optimal performance.
@@ -99,6 +101,7 @@ export function processUtf8Bytes(
         error = result.error;
         codePoint = `U+${byte1.toString(16).padStart(4, '0').toUpperCase()}`;
         utfEncoding = `0x${byte1.toString(16).padStart(2, '0').toUpperCase()}`;
+        overlongBy = 0;
     }
     // Note: The following 'else if' for (byte1 >> 6 | 0) === 0b10 is technically redundant due to earlier checks,
     // but kept for logical flow. It would only be hit if those initial checks were removed.
@@ -119,6 +122,7 @@ export function processUtf8Bytes(
             error = result.error;
             codePoint = `U+${byte.toString(16).padStart(4, '0').toUpperCase()}`;
             utfEncoding = `0x${byte1.toString(16).padStart(2, '0').toUpperCase()}${byte2.toString(16).padStart(2, '0').toUpperCase()}`;
+            overlongBy = byte >= 0x80 ? 0 : 1; // Overlong if code point < U+0080
         } else {
             error = "⚠️ Error: Invalid UTF-8 sequence: Expected continuation byte for 2-byte character.";
         }
@@ -135,6 +139,7 @@ export function processUtf8Bytes(
             error = result.error;
             codePoint = `U+${byte.toString(16).padStart(4, '0').toUpperCase()}`;
             utfEncoding = `0x${byte1.toString(16).padStart(2, '0').toUpperCase()}${byte2.toString(16).padStart(2, '0').toUpperCase()}${byte3.toString(16).padStart(2, '0').toUpperCase()}`;
+            overlongBy = byte >= 0x800 ? 0 : (byte >= 0x80 ? 1 : 2); // Overlong if code point < U+0800
         } else {
             error = "⚠️ Error: Invalid UTF-8 sequence: Expected continuation byte for 3-byte character.";
         }
@@ -154,6 +159,7 @@ export function processUtf8Bytes(
                 ? `U+${byte.toString(16).toUpperCase()}`
                 : `U+${byte.toString(16).padStart(4, '0').toUpperCase()}`; // Overlong code points
             utfEncoding = `0x${byte1.toString(16).padStart(2, '0').toUpperCase()}${byte2.toString(16).padStart(2, '0').toUpperCase()}${byte3.toString(16).padStart(2, '0').toUpperCase()}${byte4.toString(16).padStart(2, '0').toUpperCase()}`;
+            overlongBy = byte >= 0x10000 ? 0 : (byte >= 0x800 ? 1 : (byte >= 0x80 ? 2 : 3)); // Overlong if code point < U+10000
         } else {
             error = "⚠️ Error: Invalid UTF-8 sequence: Expected continuation byte for 4-byte character.";
         }
@@ -163,7 +169,8 @@ export function processUtf8Bytes(
         utf: utfEncoding,
         codepoint: codePoint,
         character: stringValue,
-        error: error
+        error: error,
+        overlongBy: overlongBy
     };
 }
 
