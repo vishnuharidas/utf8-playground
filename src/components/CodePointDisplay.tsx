@@ -9,7 +9,7 @@ interface CodePointDisplayProps {
 
 function CodePointDisplay(props: CodePointDisplayProps) {
 
-    const { utf, codepoint, character, error } = processUtf8Bytes(props.codePoint);
+    const { utf, codepoint, character, error, overlongBy } = processUtf8Bytes(props.codePoint);
 
     const unicodeLookup = codepoint ? lookupUnicode(codepoint.replace(/^U\+/, "")) : null;
     const [nextCodepoint, setNextCodepoint] = useState(codepoint);
@@ -53,6 +53,18 @@ function CodePointDisplay(props: CodePointDisplayProps) {
                     <p className='font-mono text-md md:text-2xl'>{unicodeLookup ? unicodeLookup.name : "—"}</p>
                 </div>
             </div>
+
+            {
+                (overlongBy != undefined && overlongBy > 0) &&
+                <div className="text-red-700 bg-amber-100 p-2 border-2 border-amber-300 text-l text-center">
+                    {`‼️ Overlong encoding: This character is encoded with ${overlongBy} extra byte${overlongBy > 1 ? 's' : ''} than necessary. This can be a security risk in some contexts. `}
+                    <a href="#" className="text-lg font-light" onClick={(e) => {
+                        e.preventDefault();
+                        props.onChangeCodePoint(codepoint?.replace('U+', '') ?? ''); // Try to reset to the correct codepoint
+                    }}>Fix this.</a>
+                </div>
+            }
+
             <div className="border-dashed border-2 w-full h-full flex items-center justify-center">
                 {
                     error ? (
