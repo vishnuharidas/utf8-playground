@@ -22,7 +22,7 @@ function App() {
 
   function setCodepoint(codepoint: string) {
     const int = codePointToUtf8Int(codepoint);
-    if (!int) return;
+    if (int == null) return;
     setBitwiseValue(int);
   }
 
