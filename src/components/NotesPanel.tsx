@@ -130,6 +130,11 @@ function NotesPanel(props: NotesPanelProps) {
 
                 <br />
                 <p className="text-sm text-gray-600 border-t-1 border-t-gray-400 pt-4">
+                    <strong>Unicode version:</strong> <a className="text-blue-500 underline hover:text-blue-700" href="https://www.unicode.org/versions/Unicode17.0.0/" target="_blank">17.0.0↗</a>, Sept 09, 2025.
+                    <br />Note: Some characters may not appear in your device if your device has not been updated to the latest Unicode version. Try loading the <a href="#" onClick={(e) => { e.preventDefault(); props.onClick && props.onClick(0xF09FABAF) }}>fight cloud emoji</a> to test.
+
+                    <br />
+                    <br />
                     Copyright (c) 2025 The UTF-8 Playground Contributors
                     <br />
                     This software is published under MIT License. See <a href="https://github.com/vishnuharidas/utf8-playground" target="_blank"> repository↗</a> for more details.
